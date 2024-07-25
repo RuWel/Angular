@@ -1,0 +1,46 @@
+<!-- Tutorial rows -->
+<div class="row">
+  <div class="col-12 p-2">
+    <div
+      *ngFor="
+        let tutorial of tutorialsService.tutorials$
+          | async
+          | slice : pagingStart : pagingEnd;
+        trackBy: trackFn
+      "
+      class="card m-1 p-1 bg-light"
+    >
+      <tutorialdetail-tag [tutorial]="tutorial"></tutorialdetail-tag>
+    </div>
+  </div>
+
+  <!-- Paging buttons -->
+  <div class="row">
+    <div class="col-2 form-inline float-left">
+      <select
+        class="form-select"
+        [value]="tutorialsPerPage"
+        (change)="changePageSize($event)"
+        [disabled]="isPagingSelectDisabled()"
+      >
+        <option value="3">3 tutorials per page</option>
+        <option value="4">4 tutorials per page</option>
+        <option value="6">6 tutorials per page</option>
+      </select>
+    </div>
+
+    <div class="col-9">
+      <div class="btn-group float-end">
+        <button
+          *counter="let page of getPageCount()"
+          id="pagebutton{{ page }}"
+          (click)="changePage(page)"
+          class="btn btn-outline-primary"
+          [class.active]="page == selectedPage"
+        >
+          {{ page }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

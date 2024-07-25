@@ -1,0 +1,27 @@
+<div *ngIf="serverAlive">
+    <tutorial-tag></tutorial-tag>
+</div>
+
+
+<!-- Modal -->
+<button type="button" id="modalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" hidden>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog"> 
+  <div class="modal-dialog modal-dialog-centered"> 
+      <div class="modal-content"> 
+          <div class="modal-header"> 
+              <h5 class="modal-title not-found-color" id="myModalLabel" style="text-align: center; width: 100%">
+                  <i class="fa-solid fa-ban"></i>&nbsp;
+                  Attention !!!</h5> 
+          </div> 
+          <div class="modal-body"> 
+            <i class="fa-solid fa-server"></i>&nbsp;Server not responding. 
+          </div> 
+          <div class="modal-footer horizontal-center"> 
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="checkServerAgain()">Retry</button> 
+          </div> 
+      </div> 
+  </div> 
+</div> 

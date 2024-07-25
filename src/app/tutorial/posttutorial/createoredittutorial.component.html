@@ -1,0 +1,41 @@
+<form #tutorialForm="ngForm" id="tutorialForm" class="was-validated" (ngSubmit)="executeAction()" novalidate>
+	<div class="mb-3 mt-3">
+	  	<label for="title" class="form-label">Title:</label>
+	  	<div *ngIf="actionMode == 0; else updateTitleAction">
+			<input type="text" class="form-control" id="title" placeholder="Enter tutorial title" name="title" required [(ngModel)]="tutorial.title">
+			<div class="valid-feedback">Valid.</div>
+	  		<div class="invalid-feedback">Please enter a title.</div>
+	  	</div> 
+	  	<ng-template #updateTitleAction>
+			<input type="text" class="form-control" id="title" placeholder="Enter tutorial title" name="title" required [(ngModel)]="tutorial.title">
+			<div class="valid-feedback">Update the title.</div>
+			<div class="invalid-feedback">Please enter a title.</div>
+		</ng-template>
+	</div>
+	<div class="mb-3">
+	  	<label for="description" class="form-label">Description:</label>
+	  	<div *ngIf="actionMode == 0; else updateDescriptionAction">
+			<input type="text" class="form-control" id="description" placeholder="Enter tutorial description" name="description" required [(ngModel)]="tutorial.description" (input)="onInput($event)">
+			<div class="valid-feedback">Valid.</div>
+		  	<div class="invalid-feedback">Please enter a description.</div>
+	  	</div> 
+	  	<ng-template #updateDescriptionAction>
+			<input type="text" class="form-control" id="description" placeholder="Enter tutorial description" name="description" required [(ngModel)]="tutorial.description" (input)="onInput($event)">
+			<div class="valid-feedback">Update the description.</div>
+			<div class="invalid-feedback">Please enter a description.</div>
+		</ng-template>
+	</div>
+	<div class="mb-3">
+		<div>
+			<label for="file" class="form-label">Attachment: </label>&nbsp;
+			<i class="fas fa-file-export"></i>&nbsp;
+			<label for="file" class="form-label tutorial-filename-color">{{ getFileInfo() }}</label>
+		</div>
+		<input type="file" class="form-control" id="file" name="file" [required]="isFileSelectRequired()" (change)="onFileSelected($event)">
+		<div class="valid-feedback">Valid.</div>
+		<div class="invalid-feedback">Please select a tutorial file.</div>
+
+	</div>
+	<button type="submit" class="btn btn-primary m-2" [disabled]="isCreateButtonDisabled()">{{buttonCaption}}</button>
+	<button type="submit" class="btn btn-secondary m-2" (click)="cancelClick()">Cancel</button>
+  </form>

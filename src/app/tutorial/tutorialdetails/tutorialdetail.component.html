@@ -1,0 +1,32 @@
+				<div class="row">
+					<div class="col-11 p-1 me-auto">
+						<h6 class="m-1 p-1 tutorial-title-color" style="font-family: Quicksand">
+							<i class="fas fa-key tooltip-test" title="id"></i>
+							[{{ tutorial.id | number: '4.0-0' | nocomma }}] : 
+							<i class="fas fa-heading tooltip-test" title="title"></i>&nbsp;"{{tutorial.title}}"</h6>
+						<div class="card bg-light m-1">
+							<div class="card-body">
+							  <p class="card-text">{{tutorial.description}}</p>
+							</div>
+							<div class="card-header tutorial-filename-color" style="font-family: Quicksand">
+								<i class="fas fa-file tooltip-test" title="file"></i>
+								{{ tutorial.filename }}</div>
+						</div>
+					</div>
+					<div class="col-1 p-2">
+						<span class="m-1 p-1 badge badge-pill" [ngClass]="getPublishedClass(tutorial)">
+							Published:{{getPublishedString(tutorial)}}
+						</span>
+						<div class="btn-group">
+							<button class="btn btn-sm" id="btn-icon-update" [hidden]="isButtonHidden(tutorial)" (click)="updateTutorial(tutorial)">
+								<p class="tooltip-test" title="update tutorial"><i class="fas fa-pen-nib"></i></p>
+							</button>
+							<button class="btn btn-sm" id="btn-icon-publish" [hidden]="isButtonHidden(tutorial)" (click)="publishTutorial(tutorial)">
+								<p href="#" class="tooltip-test" title="publish tutorial"><i class="fas fa-upload"></i></p>
+							</button>
+							<button class="btn btn-sm" id="btn-icon-delete" [hidden]="isButtonHidden(tutorial)" (click)="deleteTutorial(tutorial)">
+								<p href="#" class="tooltip-test" title="delete tutorial"><i class="fas fa-trash-can"></i></p>
+							</button>
+						</div>
+					</div>
+				</div>

@@ -1,0 +1,31 @@
+.brand-text-color {
+    color: rgb(255, 123, 0);
+}
+
+.brand-facebook-color {
+    color: #3b5998;
+}
+
+.brand-messenger-color {
+    color: #168AFF;
+}
+
+.brand-twitter-color {
+    color: #00acee;
+}
+
+.brand-whatsapp-color {
+    color: #25d366;
+}
+
+.brand-linkedin-color {
+    color: #0a66c2;
+}
+
+.footer { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    z-index: 10;
+    margin-left: 20px;
+}

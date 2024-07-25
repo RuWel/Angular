@@ -1,0 +1,288 @@
+<div class="container-fluid">
+  <!-- Brand Title -->
+  <div class="row">
+    <div class="col-10 bg-dark brand-text-color">
+      <a class="navbar-brand"
+        ><i class="fas fa-book-open tooltip-test" title="tutorials">&nbsp;</i
+        >Tut-O-Pedia</a
+      >
+    </div>
+    <div class="col-2 bg-dark float-end">
+      <span *ngFor="let n of numSequence(27)">&nbsp;</span>
+      <a
+        href="https://www.facebook.com/"
+        aria-label="Mijn Facebook pagina"
+        target="_blank"
+        rel="noopener"
+        class="nav__link nav__link--facebook"
+      >
+        <i
+          class="fa-brands fa-facebook brand-facebook-color tooltip-test"
+          title="facebook"
+        ></i> </a
+      >&nbsp;
+      <a
+        href="https://www.messenger.com/?locale=nl_NL"
+        aria-label="Mijn LinkedIn pagina"
+        target="_blank"
+        rel="noopener"
+        class="nav__link nav__link--facebook"
+      >
+        <i
+          class="fa-brands fa-facebook-messenger brand-messenger-color tooltip-test"
+          title="messenger"
+        ></i> </a
+      >&nbsp;
+      <a
+        href="https://www.twitter.com/"
+        aria-label="Mijn LinkedIn pagina"
+        target="_blank"
+        rel="noopener"
+        class="nav__link nav__link--facebook"
+      >
+        <i
+          class="fa-brands fa-twitter brand-twitter-color tooltip-test"
+          title="twitter"
+        ></i> </a
+      >&nbsp;
+      <a
+        href="https://www.whatsapp.com/"
+        aria-label="Mijn LinkedIn pagina"
+        target="_blank"
+        rel="noopener"
+        class="nav__link nav__link--facebook"
+      >
+        <i
+          class="fa-brands fa-whatsapp brand-whatsapp-color tooltip-test"
+          title="whatsapp"
+        ></i> </a
+      >&nbsp;
+      <a
+        href="https://www.linkedin.com/"
+        aria-label="Mijn LinkedIn pagina"
+        target="_blank"
+        rel="noopener"
+        class="nav__link nav__link--facebook"
+      >
+        <i
+          class="fa-brands fa-linkedin brand-linkedin-color tooltip-test"
+          title="linkedin"
+        ></i> </a
+      >&nbsp;
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="row">
+    <div class="col-auto p-1">
+      <input
+        class="btn-check"
+        type="checkbox"
+        id="btn-check"
+        [checked]="IsHomeButtonChecked()"
+        [disabled]="IsHomeButtonDisabled()"
+        (click)="home()"
+      />
+      <label class="btn btn-outline-primary" for="btn-check"
+        ><i class="fas fa-house tooltip-test" title="home"></i>&nbsp;Home</label
+      >
+    </div>
+    <div class="col-auto p-1">
+      <input
+        class="btn-check"
+        type="checkbox"
+        id="btn-create"
+        [checked]="IsCreateButtonChecked()"
+        [disabled]="IsCreateButtonDisabled()"
+        (click)="createTutorial()"
+      />
+      <label class="btn btn-outline-primary" for="btn-create"
+        ><i class="fas fa-square-plus tooltip-test" title="create tutorial"></i
+        >&nbsp;Create Tutorial</label
+      >
+    </div>
+    <div class="col-auto p-1">
+      <input
+        class="btn-check"
+        type="checkbox"
+        id="btn-find"
+        [checked]="IsFindButtonChecked()"
+        [disabled]="IsFindButtonDisabled()"
+        (click)="findTutorial()"
+      />
+      <label class="btn btn-outline-primary" for="btn-find"
+        ><i
+          class="fas fa-magnifying-glass-arrow-right tooltip-test"
+          title="find tutorial"
+        ></i
+        >&nbsp;Find Tutorial</label
+      >
+    </div>
+
+    <div class="col-3 p-1">
+      <div class="btn-group float-end">
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          id="btn-all-pub"
+          [disabled]="IsFindAllPublishedTutorialsDisabled()"
+          (click)="findAllPublishedTutorials()"
+        >
+          All Published
+        </button>
+        <button
+          class="btn btn-outline-success"
+          id="btn-all-not-pub"
+          [disabled]="IsFindAllUnpublishedTutorialsDisabled()"
+          (click)="findAllNotPublishedTutorials()"
+        >
+          All Unpublished
+        </button>
+        <button
+          class="btn btn-outline-success float-right"
+          id="btn-all"
+          [disabled]="IsFindAllTutorialsDisabled()"
+          (click)="findAllTutorials()"
+        >
+          All Tutorials
+        </button>
+      </div>
+    </div>
+
+    <div class="col-auto p-1 mx-5">
+      <div class="input-group">
+        <div class="input-text-group p-1">
+          <i class="fas fa-id-card-clip"></i>
+        </div>
+        &nbsp;
+        <input
+          #idvalue
+          id="idInput"
+          name="idvalue"
+          onClick="this.setSelectionRange(0, this.value.length)"
+          [disabled]="isFindByIdGroupDisabled()"
+        />
+        <div
+          class="btn"
+          id="idButton"
+          (click)="findTutorialById(idvalue.value)"
+        >
+          <i
+            class="fas fa-magnifying-glass tooltip-test"
+            title="Search By Id"
+          ></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 p-1">
+      <div class="btn-group float-end">
+        <button
+          class="btn btn-outline-success"
+          id="btn-delete"
+          (click)="deleteAllTutorials()"
+          [disabled]="isDeleteAllButtonDisabled()"
+        >
+          Delete All
+        </button>
+        <button
+          class="btn btn-outline-success float-right"
+          id="btn-publish"
+          (click)="publishAllTutorials()"
+          [disabled]="isPublishAllButtonDisabled()"
+        >
+          Publish All
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--	<button type="button" (click)="btnClick()">TEST</button> -->
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Modal for Tutorial not found -->
+<button
+  type="button"
+  id="modalNotFoundButton"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#modalNotFound"
+  hidden
+></button>
+<div
+  class="modal fade"
+  id="modalNotFound"
+  tabindex="-1"
+  aria-labelledby="modalNotFoundLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title not-found-color"
+          id="myModalLabel"
+          style="text-align: center; width: 100%"
+        >
+          <i class="fa-solid fa-ban"></i>&nbsp; Tutorial Not Found
+        </h5>
+      </div>
+      <div class="modal-body">Tutorial with id {{ tutorialId }} not found.</div>
+      <div class="modal-footer horizontal-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Dialog for DeleteAll and PublishAll -->
+<button
+  type="button"
+  id="modalDeletePublishButton"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#modalDeletePublish"
+  hidden
+></button>
+
+<div
+  class="modal fade"
+  id="modalDeletePublish"
+  tabindex="-1"
+  aria-labelledby="myDPModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title not-found-color"
+          id="myModalLabel"
+          style="text-align: center; width: 100%"
+        >
+          <i class="fa-solid fa-ban"></i>&nbsp; {{ modalText }} all tutorials
+        </h5>
+      </div>
+      <div class="modal-body">{{ modalText }} all tutorials ?</div>
+      <div class="modal-footer horizontal-center">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="deleteOrPublishAll()"
+        >
+          Yes
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer align:right">
+  <i>© 2024 Rudi Welter (Powered By Angular)</i>
+</div>

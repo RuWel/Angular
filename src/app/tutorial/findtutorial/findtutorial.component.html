@@ -1,0 +1,48 @@
+<form #findForm="ngForm" id="findForm" class="was-validated" novalidate>
+	<div class="form-group m-2">
+		<button type="button" class="btn btn-primary position-relative" (click)="addKeyWord()" [disabled]="isAddMoreKeywordsDisabled()">
+			Keyword
+			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" [ngClass]="getClass()">
+				{{this.keywordsService.getKeywords().length}}
+			</span>
+			<span class="visually-hidden">remaining keywords</span>
+		</button>
+
+		<div *ngFor="let keyword of keywordsService.getKeywords(); let i = index; trackBy: trackByFn">
+			<span class="input-group m-1">
+				<input type="text" class="form-control" id="{{keywordsService.getNrOfKeywords()}}" placeholder="Enter keyword" required (input)="onInput($event)" [(ngModel)]="keywordsService.getKeywords()[i]" [ngModelOptions]="{standalone: true}">
+				<span class="input-group-text" id="{{keywordsService.getNrOfKeywords()}}">
+					<button class="btn btn-sm" id="btn-icon-delete" (click)="keywordsService.removeKeyword(keyword)">
+						<i class="fas fa-trash-can tooltip-test" title="delete keyword"></i>
+					</button>
+				</span>
+				<div class="valid-feedback">Valid.</div>
+				<div class="invalid-feedback">Please enter a keyword.</div>
+			</span>
+		</div>
+	</div>
+
+	<button class="btn btn-primary m-2" type="btn" [disabled]="isFindButtonDisabled()" (click)="findTutorial()">Find Tutorial</button>
+	<button class="btn btn-secondary m-2" type="btn" (click)="home()">Cancel</button>
+</form>
+
+<button type="button" id="modalButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" hidden>
+</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"> 
+	<div class="modal-dialog modal-dialog-centered"> 
+		<div class="modal-content"> 
+			<div class="modal-header"> 
+				<h5 class="modal-title not-found-color" id="myModalLabel" style="text-align: center; width: 100%">
+					<i class="fa-solid fa-ban"></i>&nbsp;
+					Tutorial Not Found</h5> 
+			</div> 
+			<div class="modal-body"> 
+				No Tutorial found. 
+			</div> 
+			<div class="modal-footer horizontal-center"> 
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+			</div> 
+		</div> 
+	</div> 
+</div> 
